@@ -1,0 +1,31 @@
+# Training configuration for fine-tuning the summarization model
+
+model_name: "facebook/bart-base"      # or "google/flan-t5-base"
+
+# Paths to training and validation data CSV files
+train_data_path: "data/mimic_train.csv"
+val_data_path: "data/mimic_val.csv"
+
+# Directory where the fine-tuned model and checkpoints will be saved
+output_dir: "models/healthnotes-summarizer"
+
+# Training hyperparameters
+batch_size: 8                        # batch size per device
+num_train_epochs: 3                  # number of training epochs
+learning_rate: 5e-5                  # learning rate for optimizer
+
+# Maximum input and output sequence lengths
+max_input_length: 1024               # truncate or pad clinical notes to this length
+max_output_length: 256               # truncate or pad discharge summaries to this length
+
+# Random seed for reproducibility
+seed: 42
+
+# Evaluation settings
+evaluation_strategy: "epoch"         # evaluate at the end of every epoch
+save_strategy: "epoch"               # save checkpoint at end of every epoch
+save_total_limit: 2                  # maximum number of checkpoints to keep
+
+# Miscellaneous
+logging_dir: "logs"                  # directory for training logs
+logging_steps: 100                   # log training info every n steps
